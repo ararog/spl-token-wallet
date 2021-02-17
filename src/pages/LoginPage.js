@@ -125,9 +125,6 @@ function SeedWordsForm({ mnemonicAndSeed, goForward }) {
         <Typography paragraph>
           {t('private_keys_storage')}
         </Typography>
-        <Typography paragraph>
-          {t('sollet_derivation_path', {interpolation: {escapeValue: false}})}            
-        </Typography>
         <FormControlLabel
           control={
             <Checkbox
