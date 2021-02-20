@@ -386,11 +386,11 @@ function BalanceListItemDetails({ publicKey, serumMarkets, balanceInfo }) {
             {market && (
               <Typography variant="body2">
                 <Link
-                  href={`https://dex.projectserum.com/#/market/${market}`}
+                  href={`https://dex.doce.finance/#/market/${market}`}
                   target="_blank"
                   rel="noopener"
                 >
-                  View on Serum
+                  {t("view_serum")}
                 </Link>
               </Typography>
             )}
@@ -404,7 +404,7 @@ function BalanceListItemDetails({ publicKey, serumMarkets, balanceInfo }) {
                   target="_blank"
                   rel="noopener"
                 >
-                  View on Ethereum
+                  {t("view_ethereum")}  
                 </Link>
               </Typography>
             )}
