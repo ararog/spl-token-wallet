@@ -5,18 +5,13 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogForm from './DialogForm';
 import { abbreviateAddress } from '../utils/utils';
 import CopyableDisplay from './CopyableDisplay';
-import {
-  useIsProdNetwork,
-  useSolanaExplorerUrlSuffix,
-} from '../utils/connection';
+import { useSolanaExplorerUrlSuffix } from '../utils/connection';
 import Typography from '@material-ui/core/Typography';
 import DialogActions from '@material-ui/core/DialogActions';
 import Button from '@material-ui/core/Button';
 import { useAsyncData } from '../utils/fetch-loop';
 import tuple from 'immutable-tuple';
-import { showSwapAddress } from '../utils/config';
 import { useCallAsync } from '../utils/notifications';
-import { swapApiRequest } from '../utils/swap/api';
 import {
   ConnectToMetamaskButton,
   getErc20Balance,
@@ -39,33 +34,13 @@ export default function DepositDialog({
   onClose,
   publicKey,
   balanceInfo,
+  swapInfo,
 }) {
   const ethAccount = useEthAccount();
-  const isProdNetwork = useIsProdNetwork();
   const urlSuffix = useSolanaExplorerUrlSuffix();
   const { mint, tokenName, tokenSymbol, owner } = balanceInfo;
   const [tab, setTab] = useState(0);
   const { t } = useTranslation();
-  const [swapInfo] = useAsyncData(async () => {
-    if (!showSwapAddress || !isProdNetwork) {
-      return null;
-    }
-    return await swapApiRequest(
-      'POST',
-      'swap_to',
-      {
-        blockchain: 'sol',
-        coin: balanceInfo.mint?.toBase58(),
-        address: publicKey.toBase58(),
-      },
-      { ignoreUserErrors: true },
-    );
-  }, [
-    'swapInfo',
-    isProdNetwork,
-    balanceInfo.mint?.toBase58(),
-    publicKey.toBase58(),
-  ]);
 
   let tabs = null;
   if (swapInfo) {
