@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -58,6 +58,28 @@ const balanceFormat = new Intl.NumberFormat(undefined, {
   useGrouping: true,
 });
 
+const serumMarkets = (() => {
+  const m = {};
+  MARKETS.forEach((market) => {
+    const coin = market.name.split('/')[0];
+    if (m[coin]) {
+      // Only override a market if it's not deprecated	.
+      if (!m.deprecated) {
+        m[coin] = {
+          publicKey: market.address,
+          name: market.name.split('/').join(''),
+        };
+      }
+    } else {
+      m[coin] = {
+        publicKey: market.address,
+        name: market.name.split('/').join(''),
+      };
+    }
+  });
+  return m;
+})();
+
 export default function BalancesList() {
   const wallet = useWallet();
   const [publicKeys, loaded] = useWalletPublicKeys();
@@ -68,28 +90,6 @@ export default function BalancesList() {
   const { accounts, setAccountName } = useWalletSelector();
   const { t } = useTranslation();
   const selectedAccount = accounts.find((a) => a.isSelected);
-  const serumMarkets = useMemo(() => {
-    const m = {};
-    MARKETS.forEach((market) => {
-      const coin = market.name.split('/')[0];
-      if (m[coin]) {
-        // Only override a market if it's not deprecated	.
-        if (!m.deprecated) {
-          m[coin] = {
-            publicKey: market.address,
-            name: market.name.split('/').join(''),
-          };
-        }
-      } else {
-        m[coin] = {
-          publicKey: market.address,
-          name: market.name.split('/').join(''),
-        };
-      }
-    });
-
-    return m;
-  }, []);
 
   return (
     <Paper>
@@ -129,11 +129,7 @@ export default function BalancesList() {
       </AppBar>
       <List disablePadding>
         {publicKeys.map((publicKey) => (
-          <BalanceListItem
-            key={publicKey.toBase58()}
-            publicKey={publicKey}
-            serumMarkets={serumMarkets}
-          />
+          <BalanceListItem key={publicKey.toBase58()} publicKey={publicKey} />
         ))}
         {loaded ? null : <LoadingIndicator />}
       </List>
@@ -172,7 +168,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function BalanceListItem({ publicKey, serumMarkets, expandable }) {
+export function BalanceListItem({ publicKey, expandable }) {
   const balanceInfo = useBalanceInfo(publicKey);
   const classes = useStyles();
   const connection = useConnection();
@@ -201,7 +197,7 @@ export function BalanceListItem({ publicKey, serumMarkets, expandable }) {
         setPrice(null);
       }
     }
-  }, [serumMarkets, price, balanceInfo, connection]);
+  }, [price, balanceInfo, connection]);
 
   expandable = expandable === undefined ? true : expandable;
 
@@ -465,7 +461,6 @@ class PriceStore {
         return;
       }
       if (this.cache[marketName] === undefined) {
-        this.cache[marketName] = null;
         fetch(`https://serum-api.bonfida.com/orderbooks/${marketName}`).then(
           (resp) => {
             resp.json().then((resp) => {
