@@ -108,6 +108,8 @@ export const TOKENS = {
       tokenSymbol: 'HGET',
       mintAddress: 'BtZQfWqDGbk9Wf2rXEiWyQBdBY1etnUUn6zEphvVS7yN',
       tokenName: 'Wrapped HGET',
+      icon:
+        'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x7968bc6a03017eA2de509AAA816F163Db0f35148/logo.png',
     },
     {
       tokenSymbol: 'CREAM',
@@ -115,16 +117,6 @@ export const TOKENS = {
       tokenName: 'Wrapped CREAM',
       icon:
         'https://raw.githubusercontent.com/trustwallet/assets/4c82c2a409f18a4dd96a504f967a55a8fe47026d/blockchains/smartchain/assets/0xd4CB328A82bDf5f03eB737f37Fa6B370aef3e888/logo.png',
-    },
-    {
-      tokenSymbol: 'UBXT',
-      mintAddress: '873KLxCbz7s9Kc4ZzgYRtNmhfkQrhfyWGZJBmyCbC3ei',
-      tokenName: 'Wrapped UBXT',
-    },
-    {
-      tokenSymbol: 'HNT',
-      mintAddress: 'HqB7uswoVg4suaQiDP3wjxob1G5WdZ144zhdStwMCq7e',
-      tokenName: 'Wrapped HNT',
     },
     {
       tokenSymbol: 'FRONT',
@@ -141,11 +133,6 @@ export const TOKENS = {
         'https://raw.githubusercontent.com/trustwallet/assets/878dcab0fab90e6593bcb9b7d941be4915f287dc/blockchains/ethereum/assets/0xb2734a4Cec32C81FDE26B0024Ad3ceB8C9b34037/logo.png',
     },
     {
-      tokenSymbol: 'HXRO',
-      mintAddress: 'DJafV9qemGp7mLMEn5wrfqaFwxsbLgUsGVS16zKRk9kc',
-      tokenName: 'Wrapped HXRO',
-    },
-    {
       tokenSymbol: 'UNI',
       mintAddress: 'DEhAasscXF4kEGxFgJ3bq4PpVGp5wyUxMRvn6TzGVHaw',
       tokenName: 'Wrapped UNI',
@@ -156,6 +143,7 @@ export const TOKENS = {
       tokenSymbol: 'MATH',
       mintAddress: 'GeDS162t9yGJuLEHPWXXGrb1zwkzinCgRwnT8vHYjKza',
       tokenName: 'Wrapped MATH',
+      icon: 'https://etherscan.io/token/images/mathwallet_32.png',
     },
     {
       tokenSymbol: 'TOMO',
@@ -201,6 +189,13 @@ export const TOKENS = {
       tokenName: 'KIN',
       icon:
         'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/kin/info/logo.png',
+    },
+    {
+        tokenSymbol: 'BRZ',
+        mintAddress: 'FtgGSFADXBtroxq8VCausXRr2of47QBf5AS1NtZCu4GD',
+        tokenName: 'Brazilian Digital Token',
+        icon:
+          'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x420412E765BFa6d85aaaC94b4f7b708C89be2e2B/logo.png',
     },
   ],
 };
