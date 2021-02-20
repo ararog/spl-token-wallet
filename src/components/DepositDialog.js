@@ -40,6 +40,7 @@ export default function DepositDialog({
   publicKey,
   balanceInfo,
 }) {
+  const ethAccount = useEthAccount();
   const isProdNetwork = useIsProdNetwork();
   const urlSuffix = useSolanaExplorerUrlSuffix();
   const { mint, tokenName, tokenSymbol, owner } = balanceInfo;
@@ -96,6 +97,13 @@ export default function DepositDialog({
       <DialogTitle>
         {t("deposit_details", { tokenName: tokenName ?? mint.toBase58() })}
         {tokenSymbol ? ` (${tokenSymbol})` : null}
+        {ethAccount && (
+          <div>
+            <Typography color="textSecondary" style={{ fontSize: '14px' }}>
+              Metamask connected: {ethAccount}
+            </Typography>
+          </div>
+        )}
       </DialogTitle>
       {tabs}
       <DialogContent style={{ paddingTop: 16 }}>
